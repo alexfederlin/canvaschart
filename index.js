@@ -1,4 +1,6 @@
-var app = require('express')();
+const express = require('express');
+const app = express();
+
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
@@ -15,6 +17,7 @@ parser.on('data', function (data) {
   io.emit('data', data)
 })
 
+app.use(express.static('res'));
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
